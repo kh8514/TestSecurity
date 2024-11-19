@@ -17,6 +17,10 @@ public class JoinService {
 
     public void joinProcess(JoinDTO joinDTO) {
 
+        boolean isUser  = userRepository.existsByUsername(joinDTO.getUsername());
+        if(isUser ) {
+            throw new IllegalArgumentException("중복된 아이디가 존재합니다.");
+        }
 
         UserEntity data = new UserEntity();
         data.setUsername(joinDTO.getUsername());
